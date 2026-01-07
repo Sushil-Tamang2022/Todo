@@ -3,6 +3,7 @@ import Header from './components/Header'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Todo from './pages/Todo'
+import NextTodo from './pages/NextTodo'
 
 const App = () => {
   return (
@@ -10,7 +11,8 @@ const App = () => {
       <Header />
       <Routes>
         <Route path='/' element={<Home />}/>
-        <Route path='/todo' element={<Todo />}/>
+        {/* <Route path='/todo' element={<Todo />}/> */}
+        <Route path='/nextTodo' element={<NextTodo />}/>
       </Routes>
     </div>
   )
