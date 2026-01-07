@@ -71,10 +71,10 @@ function NextTodo() {
                 <div className="todo1  shadow-2xl shadow-gray-100 bg-white rounded-sm p-4 flex  items-center  justify-between  ">
                   <div className="font-serif">{item.title}</div>
                   <div className="space-x-5">
-                    <button className="bg-amber-700  p-2 w-14 text-white rounded-sm">
+                    <button className="bg-amber-700  p-2 w-14 text-white rounded-sm cursor-pointer">
                       Edit
                     </button>
-                    <button onClick={() => handleDelete(item.id)} className="bg-red-600  p-2 w-14 text-white rounded-sm">
+                    <button onClick={() => handleDelete(item.id)} className="bg-red-600  p-2 w-14 text-white rounded-sm cursor-pointer">
                       Delete
                     </button>
                   </div>
