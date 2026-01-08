@@ -32,7 +32,7 @@ function NextTodo() {
     dispatch({
       type: "delete",
       payload: {
-        id: id,
+        id
       }
     })
   }
@@ -74,7 +74,14 @@ function NextTodo() {
                     <button className="bg-amber-700  p-2 w-14 text-white rounded-sm cursor-pointer">
                       Edit
                     </button>
-                    <button onClick={() => handleDelete(item.id)} className="bg-red-600  p-2 w-14 text-white rounded-sm cursor-pointer">
+                    <button onClick ={() => {
+                      dispatch({
+                        type: "delete",
+                        payload: {
+                          id : item.id
+                        }
+                      })
+                    }}className="bg-red-600  p-2 w-14 text-white rounded-sm cursor-pointer">
                       Delete
                     </button>
                   </div>
@@ -83,7 +90,10 @@ function NextTodo() {
             })}
           </>
         ) : (
-          <div className="border rounded-sm p-2">There is no todo to show</div>
+          <div className="border w-96 m-auto p-4 rounded-sm">
+            <h1 className="font-semibold">There is no todo to show</h1>
+            <img width={30} src="https://p1.hiclipart.com/preview/209/164/973/emoji-faces-sad-emoji.jpg" alt="not found" />
+          </div>
         )}
       </div>
     </div>
