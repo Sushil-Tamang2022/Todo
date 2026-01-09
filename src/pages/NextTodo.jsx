@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
 import { TodoContext } from "../context/TodoProvider";
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 function NextTodo() {
   const [title, setTitle] = useState("");
   const [titleError, setTitleError] = useState("");
-
+  const navigate = useNavigate();
   const { state, dispatch } = useContext(TodoContext);
 
   const addTodo = () => {
@@ -28,14 +29,7 @@ function NextTodo() {
   };
 
   // delete todo
-  const handleDelete = (id) => {
-    dispatch({
-      type: "delete",
-      payload: {
-        id
-      }
-    })
-  }
+  
 
   return (
     <div className="bg-gray-300 p-10 w-[700px]  m-auto mt-5   flex flex-col   ">
@@ -68,31 +62,46 @@ function NextTodo() {
           <>
             {state.todoItems.map((item) => {
               return (
-                <div className="todo1  shadow-2xl shadow-gray-100 bg-white rounded-sm p-4 flex  items-center  justify-between  ">
+                <div key={item.id} className="todo1  shadow-2xl shadow-gray-100 bg-white rounded-sm p-4 flex  items-center  justify-between  ">
                   <div className="font-serif">{item.title}</div>
                   <div className="space-x-5">
-                    <button className="bg-amber-700  p-2 w-14 text-white rounded-sm cursor-pointer">
+                    <button
+                      onClick={() => navigate("/editTodo", { state: item })}
+                      className="bg-amber-700  p-2 w-14 text-white rounded-sm cursor-pointer"
+                    >
                       Edit
                     </button>
-                    <button onClick ={() => {
-                      dispatch({
-                        type: "delete",
-                        payload: {
-                          id : item.id
-                        }
-                      })
-                    }}className="bg-red-600  p-2 w-14 text-white rounded-sm cursor-pointer">
+                    <button
+                      onClick={() => {
+                        dispatch({
+                          type: "delete",
+                          payload: {
+                            id: item.id,
+                          },
+                        });
+                      }}
+                      className="bg-red-600  p-2 w-14 text-white rounded-sm cursor-pointer"
+                    >
                       Delete
                     </button>
                   </div>
                 </div>
               );
             })}
+            <button className="bg-red-700 p-2 text-white text-center " onClick={() => {
+              dispatch({
+                type : "deleteAll"
+              })
+            }}>Delete All</button>
           </>
         ) : (
           <div className="border w-96 m-auto p-4 rounded-sm">
             <h1 className="font-semibold">There is no todo to show</h1>
-            <img width={30} src="https://p1.hiclipart.com/preview/209/164/973/emoji-faces-sad-emoji.jpg" alt="not found" />
+            <img
+              width={30}
+              src="https://p1.hiclipart.com/preview/209/164/973/emoji-faces-sad-emoji.jpg"
+              alt="not found"
+            />
           </div>
         )}
       </div>

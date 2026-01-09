@@ -40,6 +40,7 @@ const todoReducer = (state, action) => {
         };
       }
     }
+
     case "delete": {
       // filter
       //   first get id of that todo
@@ -65,12 +66,27 @@ const todoReducer = (state, action) => {
         todoItems: newTodo,
       };
     }
+
     case "update": {
-      return;
+      // todo
+      // get id and updated title
+      // then use map method then updated the exact item or todo
+
+      let updatedTodo = state.todoItems.map((item) => {
+        return item.id === action.payload.id
+          ? { ...item, title: action.payload.title }
+          : item;
+      });
+      return {
+        todoItems: updatedTodo,
+      };
     }
     case "deleteAll": {
-      return state;
+      return {
+        todoItems: [],
+      };
     }
+
     default: {
       return state;
     }
@@ -91,7 +107,7 @@ export const TodoProvider = ({ children }) => {
   );
 };
 
-// localStorage.setItem("name", "Ram")
+// localStorage.setItem("name"l, "Ram")
 // const x = localStorage.getItem("name")
 // localStorage.clear()
 // console.log(x)
